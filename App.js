@@ -1,29 +1,53 @@
+import { View, Text, StyleSheet, Image, TextInput, Button } from "react-native";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Home from "./components/Home";
+import Home from "./compoenets/Home";
 
 export default function App() {
+  const [name, setName] = useState("");
+  const [confrim, setConfrim] = useState(false);
+  const handleInput = (e) => {
+    setName(e.nativeEvent.text);
+  };
   return (
-    <View style={styles.container}>
-      <Text style={styles.color}>
-        Open up App.js to start working on your app testing!
-      </Text>
-      <Home/>
+    <View style={styles.app}>
+      <Home />
+      <Image style={styles.logo} source={require("./image/manbal.jpg")} />
+      <Image
+        style={styles.logo}
+        source={{
+          uri: "https://img.freepik.com/premium-vector/ancient-maze-geometric-antique-logo-vector-symbol_151157-1626.jpg?w=2000",
+        }}
+      />
+      <Text>{confrim && name}</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Write Your Name"
+        onChange={handleInput}
+      />
+      <Button title="Confrim" onPress={() => setConfrim(true)}/>
+      <Button title="Clear" onPress={() => setConfrim(false)} />
       <StatusBar style="auto" />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
+  app: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
-  color: {
-    color: "#fff",
-    backgroundColor: "#606060",
-    padding: "10px",
+  logo: {
+    height: 50,
+    width: "100px",
+    marginTop: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "blue",
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 20,
+    marginBottom: 20,
   },
 });
